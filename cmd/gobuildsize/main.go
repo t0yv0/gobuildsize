@@ -8,15 +8,15 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
+	"strings"
 )
 
 func main() {
-	args := append([]string{"build"}, os.Args[1:]...)
-	args = append(args, "-work", "-a")
+	args := append([]string{"build", "-work", "-a"}, os.Args[1:]...)
 	cmd := exec.Command("go", args...)
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("`go %s` command failed: %v", err, strings.Join(args, " "))
 	}
 	pat := regexp.MustCompile("WORK=(.*)")
 	workdir := pat.FindStringSubmatch(string(out))[1]
@@ -26,7 +26,7 @@ func main() {
 		fmt.Println(pkg.packageName, pkg.archiveSize)
 	}
 	if err := os.RemoveAll(workdir); err != nil {
-		log.Fatal(err)
+		log.Fatalf("failed to remove WORK directory: %v", err)
 	}
 }
 
