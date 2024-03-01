@@ -1,5 +1,8 @@
 * gobuildsize
 
+Why are my Go builds using so much space? With gobuildsize you can extract package-level data on the
+sizes of archive files fed to the linker.
+
 ** Usage
 
 Suppose you have a regular Go build:
@@ -33,3 +36,12 @@ participating in the build. For a quick example, gobuildsize can measure itself:
 | regexp/syntax        |   944206 |
 | regexp               |   809204 |
 | internal/reflectlite |   801036 |
+
+** Limitations
+
+Note that Go will aggressively eliminate unreachable package from the final executable. Therefore,
+if a packages shows up in the gobuildsize report it certainly contributes to the build-time resource
+usage and takes space in the cache, but it does not necessarily contribute to the final statically
+linked executable bloat. This report is therefore more about understanding slow builds and
+controlling resources in constrained CI environments than optimizing the size of the final
+executable.
