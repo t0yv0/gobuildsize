@@ -17,21 +17,19 @@ Substitute this command with the following:
 This will print out byte sizes of archive files that Go compiler creates for each Go package
 participating in the build. For a quick example, gobuildsize can measure itself:
 
-#+begin_src shell :results output verbatim
+#+begin_src shell
   go build ./cmd/gobuildsize
   ./gobuildsize ./cmd/gobuildsize | head -n 10
 #+end_src
 
 #+RESULTS:
-#+begin_example
-runtime 11772860
-reflect 2938266
-syscall 1799498
-time 1319664
-internal/abi 1180960
-os 1130052
-fmt 958316
-regexp/syntax 944206
-regexp 809204
-internal/reflectlite 801036
-#+end_example
+| runtime              | 11772860 |
+| reflect              |  2938266 |
+| syscall              |  1799498 |
+| time                 |  1319664 |
+| internal/abi         |  1180960 |
+| os                   |  1130052 |
+| fmt                  |   958316 |
+| regexp/syntax        |   944206 |
+| regexp               |   809204 |
+| internal/reflectlite |   801036 |
