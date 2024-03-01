@@ -17,7 +17,7 @@ Substitute this command with the following:
 This will print out byte sizes of archive files that Go compiler creates for each Go package
 participating in the build. For a quick example, gobuildsize can measure itself:
 
-#+begin_src shell
+#+begin_src shell :exports both
   go build ./cmd/gobuildsize
   ./gobuildsize ./cmd/gobuildsize | head -n 10
 #+end_src
